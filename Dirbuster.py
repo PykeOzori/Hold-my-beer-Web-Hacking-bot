@@ -32,7 +32,7 @@ def main():
 
 	webbuster = pydirbuster.Pybuster(
 		url=URL,
-		wordfile="wordlist.txt",
+		wordfile=input("Path to wordlist: "),
 		exts=[] # php, html
 	)
 
