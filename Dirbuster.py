@@ -35,6 +35,7 @@ def main():
 		wordfile=input("Path to wordlist: "),
 		exts=[] # php, html
 	)
+	webbuster.Run
 
 
 	print(webbuster.results)
