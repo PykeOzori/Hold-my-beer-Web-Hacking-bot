@@ -1,6 +1,5 @@
 import pydirbuster
 import requests
-from bs4 import BeautifulSoup
 
 def verify_domain(domain):
 	"""
@@ -77,20 +76,18 @@ def create_urls(url, results):
 
 	return new_urls
 
-def run(url):
+def run(url, wordlist):
 	"""
 	Run the dirbuster library (https://pypi.org/project/pydirbuster/) and will prompt for
 	user imput.
 
 	Args:
 		url (string): The URL to run dirbuster on
+		wordlist (string): The wordlist to use
 
 	Returns:
 		dict: Dirbuster scan results
 	"""
-
-	# TODO: See if file exists or use try/catch
-	wordlist = input("Path to wordlist: ")
 
 	webbuster = pydirbuster.Pybuster(
 		url=url,
