@@ -1,37 +1,4 @@
 import pydirbuster
-import requests
-
-def verify_domain(domain):
-	"""
-	Verifies if a domain can be reached over HTTP or HTTPS and
-	returns the full URL or None if the website is offline.
-
-	Args:
-		domain (string): The domain to verify
-
-	Returns:
-		String|None: URL of online website
-	"""
-
-	url = None
-
-	try:
-		# See if we can reach domain over HTTP or HTTPS
-		request = requests.get('http://'+domain)
-
-		if request.status_code == 301:
-			request = requests.get('https://'+domain)
-			url = 'https://'+domain
-		else: 
-			url = 'http://'+domain
-
-		# Only succeed if the status code is 200
-		if request.status_code != 200:
-			url = None
-	except:
-		print("Domain does not exist")
-	
-	return url
 
 def filter_results(results):
 	"""
