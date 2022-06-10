@@ -2,6 +2,22 @@
 import requests
 from bs4 import BeautifulSoup
 
+def find_urls(url):
+	"""
+	Find all anchor links on a URL.
+
+	Args:
+		url (string): The URL to crawl
+
+	Returns:
+		list: A list links found on the page
+	"""
+
+	url_request = requests.get(url)
+	soup = BeautifulSoup(url_request.content, 'html.parser')
+
+	return soup.find_all('a')
+
 # Crawls the website
 def crawl(url, domain):
 	"""
@@ -16,13 +32,10 @@ def crawl(url, domain):
 		list: A list of all found URL
 	"""
 	
-	# Request and parse page
-	url_request = requests.get(url)
-	soup = BeautifulSoup(url_request.content, 'html.parser')
+	# TODO: Follow further links with limit (loop) OR depth level (recursion)
 	url_set = set()
 
-	# Find all achor tags in page and get the "href" attribute
-	for links in soup.find_all('a'):
+	for links in find_urls(url):
 		results = links.get('href')
 		if results == None:
 			continue
