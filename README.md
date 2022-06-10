@@ -3,6 +3,7 @@ Jelle's awesome web scanner.
 
 Current features:
  - Run Dirbuster
+ - Crawl the first page
 
 # How to install the program
 To install the program run the following command:
@@ -37,6 +38,14 @@ Extensions:
 /admin (Status : 200)                                                                                                                                                                 
 =================================================================                                                                                                                     
 Time elapsed : 0.27653379999992467                                                                                                                                                    
-=================================================================                                                                                                                     
-['http://cheese.com/robots.txt', 'http://cheese.com/admin']  
+=================================================================            
+Found 49 URL                                                                                                                                                                            
+Found url: http://cheese.com/robots.txt
+Found url: http://cheese.com/admin
+Found url: http://cheese.com/by_texture/?per_page=20
+Found url: http://cheese.com/privacy-policy/
+Found url: http://cheese.com/camembert/
+Found url: http://cheese.com/provolone/
+
+... snipped ...
 ```

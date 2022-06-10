@@ -2,7 +2,7 @@ import sys
 import os
 import requests
 from dirbuster import run
-from WebCrawler import crawl
+from webcrawler import crawl
 
 def verify_domain(domain):
 	"""
