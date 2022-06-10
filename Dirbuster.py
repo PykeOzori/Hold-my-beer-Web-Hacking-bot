@@ -1,8 +1,5 @@
 import pydirbuster
 import requests
-from bs4 import BeautifulSoup
-
-domain = input("Website: ")
 
 def verify_domain(domain):
 	"""
@@ -35,8 +32,6 @@ def verify_domain(domain):
 		print("Domain does not exist")
 	
 	return url
-
-
 
 def clean_results(results):
 	"""
@@ -75,32 +70,3 @@ def run(url):
 	webbuster.Run()
 
 	return clean_results(webbuster.results)
-
-# Crawler part
-
-# Imports required libraries
-
-# Crawls the website
-def Crawl(url):
-    url_request = requests.get(url)
-    url_result = url_request.content
-    url_set = set()
-    soup = BeautifulSoup(url_result, 'html.parser')
-    Links = soup.find_all('a')
-    for Links in soup.find_all('a'):
-        Results = Links.get('href')
-        if Results == None:
-            continue
-
-        if 'http' not in Results:
-            Results = url + Results
-
-        if url not in Results:
-            continue
-        url_set.add(Results)
-        for URL in url_set:
-            print(url)
-    return url_set
-url_set = Crawl(url)
-for url in url_set:
-    Crawl(url)
