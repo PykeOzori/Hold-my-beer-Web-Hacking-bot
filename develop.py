@@ -2,6 +2,8 @@ import pydirbuster
 import requests
 from bs4 import BeautifulSoup
 
+domain = input("Website: ")
+
 def verify_domain(domain):
 	"""
 	Verifies if a domain can be reached over HTTP or HTTPS and
@@ -33,6 +35,8 @@ def verify_domain(domain):
 		print("Domain does not exist")
 	
 	return url
+
+
 
 def clean_results(results):
 	"""
@@ -76,15 +80,12 @@ def run(url):
 
 # Imports required libraries
 
-# Asks for user input
-URL_input = input("Website: ")
-URL = "https://" + URL_input
 # Crawls the website
-def Crawl(URL):
-    URL_Request = requests.get(URL)
-    URL_Result = URL_Request.content
-    URL_set = set()
-    soup = BeautifulSoup(URL_Result, 'html.parser')
+def Crawl(url):
+    url_request = requests.get(url)
+    url_result = url_request.content
+    url_set = set()
+    soup = BeautifulSoup(url_result, 'html.parser')
     Links = soup.find_all('a')
     for Links in soup.find_all('a'):
         Results = Links.get('href')
@@ -92,14 +93,14 @@ def Crawl(URL):
             continue
 
         if 'http' not in Results:
-            Results = URL + Results
+            Results = url + Results
 
-        if URL_input not in Results:
+        if url not in Results:
             continue
-        URL_set.add(Results)
-        for URL in URL_set:
-            print(URL)
-    return URL_set
-URL_Set = Crawl(URL)
-for URL in URL_Set:
-    Crawl(URL)
+        url_set.add(Results)
+        for URL in url_set:
+            print(url)
+    return url_set
+url_set = Crawl(url)
+for url in url_set:
+    Crawl(url)
