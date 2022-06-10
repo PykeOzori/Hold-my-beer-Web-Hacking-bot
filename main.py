@@ -2,6 +2,7 @@ import sys
 import os
 import requests
 from dirbuster import run
+from WebCrawler import crawl
 
 def verify_domain(domain):
 	"""
@@ -50,8 +51,16 @@ def main():
 	if not wordlist_exists:
 		sys.exit("Oh no, no file!")
 
-	results = run(url, wordlist)
-	print(results)
+	# Run dirbuster and webcrawler
+	dirbuster_results = run(url, wordlist)
+	crawler_results = crawl(url, domain)
+
+	# Combine and print results
+	final_list = dirbuster_results + crawler_results
+	
+	print(f"Found {len(final_list)} URL")
+	for url in final_list:
+		print(f"Found url: {url}")
 
 
 if __name__ == "__main__":

@@ -1,30 +1,39 @@
 # Imports required libraries
 import requests
 from bs4 import BeautifulSoup
-# Asks for user input
-URL_input = input("Website: ")
-URL = "https://" + URL_input
+
 # Crawls the website
-def Crawl(URL):
-    URL_Request = requests.get(URL)
-    URL_Result = URL_Request.content
-    URL_set = set()
-    soup = BeautifulSoup(URL_Result, 'html.parser')
-    Links = soup.find_all('a')
-    for Links in soup.find_all('a'):
-        Results = Links.get('href')
-        if Results == None:
-            continue
+def crawl(url, domain):
+	"""
+	Crawls and prints all links on the provided URL.
+	Only URL that match the domain will be included
 
-        if 'http' not in Results:
-            Results = URL + Results
+	Args:
+		url (string): The URL to crawl
+		domain (list): The domain to verify URLS for
 
-        if URL_input not in Results:
-            continue
-        URL_set.add(Results)
-        for URL in URL_set:
-            print(URL)
-    return URL_set
-URL_Set = Crawl(URL)
-for URL in URL_Set:
-    Crawl(URL)
+	Returns:
+		list: A list of all found URL
+	"""
+	
+	# Request and parse page
+	url_request = requests.get(url)
+	soup = BeautifulSoup(url_request.content, 'html.parser')
+	url_set = set()
+
+	# Find all achor tags in page and get the "href" attribute
+	for links in soup.find_all('a'):
+		results = links.get('href')
+		if results == None:
+			continue
+
+		if 'http' not in results:
+			results = url + results
+
+		if domain not in results:
+			continue
+		
+		url_set.add(results)
+
+	return list(url_set)
+	
